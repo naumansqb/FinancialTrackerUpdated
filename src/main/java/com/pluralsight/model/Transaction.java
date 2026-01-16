@@ -1,9 +1,9 @@
-package com.pluralsight;
+package com.pluralsight.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Transaction{
+public class Transaction {
     private LocalDate date;
     private LocalTime time;
     private String description;
@@ -17,9 +17,11 @@ public class Transaction{
         this.vendor = vendor;
         this.amount = amount;
     }
+
     public LocalTime getTime() {
         return time;
     }
+
     public LocalDate getDate() {
         return date;
     }
@@ -40,9 +42,7 @@ public class Transaction{
     public String toString() {
         return String.format(
                 "\t%-12s | %-10s | %-30s | %-25s | $%,.2f",
-                date, time, description, vendor, amount
-        );
+                date, time, description, vendor, amount);
     }
-
 
 }
