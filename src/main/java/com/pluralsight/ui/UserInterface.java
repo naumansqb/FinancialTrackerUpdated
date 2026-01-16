@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Comparator;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -111,8 +111,6 @@ public class UserInterface {
 
     private void displayLedger() {
         List<Transaction> transactions = transactionDao.getAll();
-        transactions.sort(Comparator.comparing(Transaction::getDate).reversed()
-                .thenComparing(Transaction::getTime).reversed());
 
         if (transactions.isEmpty()) {
             System.out.println("No Entries To Display.");
@@ -210,10 +208,6 @@ public class UserInterface {
 
         System.out.println("Vendor: ");
         String vendor = scanner.nextLine().trim();
-
-        // Note: Amount filter removed from DAO level for simplicity as per common
-        // request,
-        // but could be added if critical. For now focusing on string/date filters.
 
         displaySearchResults(transactionDao.search(startDate, endDate, vendor, description));
     }

@@ -18,7 +18,7 @@ public class MySqlTransactionDao implements TransactionDao {
     @Override
     public List<Transaction> getAll() {
         List<Transaction> transactions = new ArrayList<>();
-        String sql = "SELECT date, time, description, vendor, amount FROM transactions";
+        String sql = "SELECT date, time, description, vendor, amount FROM transactions ORDER BY date DESC, time DESC";
 
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -76,6 +76,8 @@ public class MySqlTransactionDao implements TransactionDao {
             sql.append(" AND description LIKE ?");
             params.add("%" + description + "%");
         }
+
+        sql.append(" ORDER BY date DESC, time DESC");
 
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql.toString())) {
